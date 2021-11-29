@@ -1,0 +1,583 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;  
+}
+:root
+{
+    --iceblue: #60BEFF;
+    --blue: #287bff;
+    --white: #ffffff;
+    --grey: #dfdfdf;
+    --black1: rgb(27, 27, 27);
+    --black2: rgb(66, 63, 63);
+}
+.body
+{
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+.container
+{
+    position: relative;
+    width: 100%;
+}
+.navigation
+{
+    position: fixed;
+    width: 80px;
+    height: 100%;
+    background: var(--iceblue);
+    border-left: 10px solid var(--iceblue);
+    transition: 0.5s;
+    overflow: hidden;
+}
+.navigation.active
+{
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: var(--iceblue);
+    border-left: 10px solid var(--iceblue);
+    transition: 0.5s;
+    overflow: hidden;
+}
+.navigation ul
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.navigation ul li
+{
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+.navigation ul li:hover,
+.navigation ul li.active
+{
+    background: var(--white);    
+}
+.navigation ul li:nth-child(1)
+{
+    margin-bottom: 30px;
+    pointer-events: none;
+}
+.navigation ul li a
+{
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--white);
+}
+.navigation ul li a:hover,
+.navigation ul li.active a
+{
+    color: var(--iceblue);
+}
+
+/*hover right radius*/
+.navigation ul li:hover a::before,
+.navigation ul li.active a::before
+{
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0px 10px var(--white);
+    pointer-events: none;
+}
+.navigation ul li:hover a::after,
+.navigation ul li.active a::after
+{
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0px 10px var(--white);
+    pointer-events: none;
+}
+.navigation ul li a .icon
+{
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 70px;
+    text-align: center;
+}
+.navigation ul li a .icon ion-icon
+{
+    font-size: 1.75em;
+}
+.navigation ul li a .title
+{
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+/* main */
+.main
+{
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: var(--white);
+    transition: 0.5s;
+}
+.main.active
+{
+    width: calc(100% - 80px);
+    left: 80px;
+}
+.main.active .dropdown-user
+{
+    left: 50px;
+}
+.topbar
+{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+.topbar-left
+{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 10px;
+}
+.toggle
+{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 2.5em;
+}
+.toggle ion-icon
+{
+    cursor: pointer;
+}
+.topbar-right
+{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 10px;
+}
+.search
+{
+    position: relative;
+    width: 250px;
+    margin: 0 10px;
+}
+.search label
+{
+    position: relative;
+    width: 100%;
+}
+.search label input
+{
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5 20px;
+    padding-left: 35px;
+    font-size: medium;
+    outline: none;
+    border: 1px solid var(--black2);
+}
+.search label ion-icon
+{
+    position: absolute;
+    top: 0;
+    left: 10px;
+    font-size: 1.2em;
+}
+.user
+{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.user img
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.dropdown-user
+{
+    position: absolute;
+    display: none;
+    top: 30px;
+    left: 10px;
+    width: 150px;
+    margin-left: 80%;
+    border: 2px solid var(--grey);
+    background: var(--iceblue);
+    border-radius: 5px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    z-index: 1000;
+    transition: 0.5ms;
+}
+.dropdown-user.active,
+.dropdown-user.active:hover
+{
+   display: block;
+   transition: 0.5ms;
+}
+.dropdown-user ul li
+{
+    position: relative;
+    width: 100%;
+    list-style: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.dropdown-user ul li:hover
+{
+    background: var(--white);
+}
+.dropdown-user ul li:hover a
+{
+    color: var(--iceblue);
+}
+.dropdown-user ul li a
+{
+   text-decoration: none;
+   font-size: 1.2em;
+   align-items: center;
+   color: var(--white);
+}
+
+/* Main */
+.cardbox-dashboard
+{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 20px;
+}
+.cardbox-dashboard .card
+{
+    position: relative;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    background: var(--white);
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    cursor: pointer;
+}
+.cardbox-dashboard .card:hover
+{
+    background: var(--iceblue);
+}
+.cardbox-dashboard .card .numbers
+{
+    position: relative;
+    font-weight: 460;
+    font-size: 2.5em;
+    color: var(--iceblue);
+}
+.cardbox-dashboard .card .cardname
+{
+    font-size: 1.1em;
+    margin-top: 5px;
+    color: var(--black2);
+}
+.cardbox-dashboard .card .icon-box
+{
+    font-size: 3.5em;
+    color: var(--black2);
+}
+.cardbox-dashboard .card:hover .numbers,
+.cardbox-dashboard .card:hover .cardname,
+.cardbox-dashboard .card:hover .icon-box
+{
+    color: var(--white);
+}
+
+/*login*/
+.cardbox-login
+{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    white-space: pre-line;
+    justify-content: center;
+}
+
+.cardbox-login .cardheader
+{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    background: var(--iceblue);
+    box-shadow: 0 7px 45px rgba(0,0,0,0.08);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.cardbox-login .cardheader .title
+{
+    display: flex;
+    justify-content: center;
+    font-size: 1.2em;
+    color: var(--white);
+}
+.cardbox-login .cardbody
+{
+    position: relative;
+    width: 100%;
+    padding: 30px;
+    display: grid;
+    justify-content: space-between;
+    background: var(--white);
+    box-shadow: 0 7px 45px rgba(0,0,0,0.08);
+}
+.cardbox-login .cardfooter
+{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    background: var(--iceblue);
+    box-shadow: 0 7px 45px rgba(0,0,0,0.08);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.cardbody .btn-login
+{
+    font-size: 1em;
+    margin-top: 20px;
+    margin-left: calc(50% - 40px);
+    transition: 0.3s;
+}
+.medium-btn
+{
+    width: 80px;
+    height: 30px;
+    border-radius: 10px;
+    border: 0.1px solid var(--black2)
+}
+.primary-btn
+{
+    background: var(--iceblue);
+    color: var(--white);
+}
+.primary-btn:hover
+{
+    opacity: 0.8;
+}
+
+/*loading*/
+.loading-bg
+{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--black1);
+    opacity: 0.5;
+}
+
+/*responsive design*/
+@media(max-width:1190px){
+    .main  .dropdown-user
+    {
+        margin-left: 76%;
+    }
+    .main.active .dropdown-user
+    {
+        margin-left: 78%;
+    }
+}
+@media(max-width:1080px){
+    .main  .dropdown-user
+    {
+        margin-left: 73%;
+    }
+    .main.active .dropdown-user
+    {
+        margin-left: 75%;
+    }
+}
+ @media(max-width:990px){
+    .navigation
+    {
+        left: -300px;
+    }
+    .navigation.active
+    {
+        width: 300px;
+        left: 0;
+    }
+    .main
+    {
+        left: 300px;
+    }
+    .main  .dropdown-user
+    {
+        margin-left: 70%;
+    }
+    .main.active
+    {
+        width: 100%;
+        left: 0;
+    }
+    .main.active .dropdown-user
+    {
+        margin-left: 75%;
+    }
+    .cardbox-dashboard
+    { 
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media(max-width: 900px)
+{
+    .main  .dropdown-user
+    {
+        margin-left: 65%;
+    }
+    .main.active .dropdown-user
+    {
+        margin-left: 72%;
+    }
+}
+@media(max-width: 850px)
+{
+    .main  .dropdown-user
+    {
+        margin-left: 63%;
+    }
+    .main.active .dropdown-user
+    {
+        margin-left: 70%;
+    }
+}
+@media(max-width: 780px)
+{
+    .user
+    {
+        min-width: 40px;   
+    }
+    .navigation
+    {
+        left: -200px;
+    }
+    .navigation.active
+    {
+        width: 200px;
+        left: 0;
+    }
+    .main
+    {
+        width: calc(100% - 200px);
+        left: 200px;
+        right: 0;
+    }
+    .main  .dropdown-user
+    {
+        margin-left: 63%;
+    }
+    .main.active
+    {   
+        width: 100%;
+        left: 0;
+    }
+    .main.active .dropdown-user
+    {
+        margin-left: 68%;
+    }
+}
+@media(max-width: 600px)
+{
+    .hydrated
+    {
+        overflow-x: hidden;
+    }
+    .cardbox-dashboard
+    {
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+@media(max-width: 480px) 
+{
+    .navigation
+    {
+        width: 100%;
+        left: -100%;
+        z-index: 1000;
+    }
+    .navigation.active
+    {
+        width: 100%;
+        left: 0px;
+    }
+    .toggle
+    {
+        z-index: 10001;
+        min-width: 40px;
+    }
+    .main .topbar
+    {
+        margin-left: calc(100% - 10px);
+    }
+    .main .topbar .topbar-right
+    {
+        display: none;
+    }
+    .main.active .topbar
+    {
+        margin-left: 0;
+    }
+    .main.active .topbar .topbar-right
+    {
+        display: flex;
+        padding-right: 15%;
+        margin-left: 0;
+    }
+}
